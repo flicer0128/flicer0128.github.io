@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>B.R.I.D.G.E — Tesoro High School</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+<style>
+
+
+
+/* ============================================================
+   1. CSS CUSTOM PROPERTIES — Tesoro Brand Colors
+   ============================================================ */
+:root {
+  /* Tesoro Brand Colors */
+  --red:        #C8102E;   /* Tesoro Red — primary action, accents */
+  --red-dark:   #a00d24;   /* Darker red — hover states */
+  --red-light:  #fde8ec;   /* Pale red — tinted backgrounds */
+  --navy:       #1D2B5F;   /* Tesoro Navy — dark backgrounds, headings */
+  --navy-mid:   #2a3d7a;   /* Medium navy — card accents */
+  --navy-light: #e8ecf7;   /* Pale navy — alternate section backgrounds */
+  --white:      #ffffff;
+  --off-white:  #f8f8f8;   /* Slightly warm white — page background */
+  --light-gray: #f0f0f0;
+
+  /* Text */
+  --text:  #1a1a2e;        /* Near-black with navy tint */
+  --muted: #5a6480;        /* Desaturated navy — supporting text */
+
+  /* Borders */
+  --border: rgba(29, 43, 95, 0.15);
+
+  /* Sizing */
+  --radius: 16px;
+}
+
+
+/* ============================================================
+   2. GLOBAL RESET & BASE STYLES
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--off-white);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+
+/* ============================================================
+   3. NAVIGATION BAR
+   ============================================================
+   Fixed top. Tesoro Navy bg, red bottom stripe.
+   Left: SVG logo + B.R.I.D.G.E text.  Right: nav links.
+   ============================================================ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  /*
+    GRADIENT: Navy deepens left→right, giving the nav bar depth and
+    matching the multi-tone blue seen in the school color palette.
+    linear-gradient direction: left side = darker navy, right = slightly lighter navy-blue.
+  */
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 64px;
+  border-bottom: 3px solid var(--red); /* Tesoro red accent stripe */
+  box-shadow: 0 2px 24px rgba(17,28,66,0.55);
+}
+
+/* Left cluster: logo image + B.R.I.D.G.E text */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-school-logo { display: flex; align-items: center; }
+
+/*
+  NAV LOGO IMAGE — official Tesoro SVG (images/tesoro-logo.svg)
+  White background patch so the navy/red/white SVG reads clearly
+  on the dark gradient nav bar.
+*/
+.nav-logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  background: transparent;
+  display: block;
+}
+
+/* B.R.I.D.G.E text */
+.nav-logo {
+  font-family: 'DM Serif Display', serif;
+  color: var(--white);
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+.nav-logo:hover { border-color: var(--red); }
+
+.nav-links { display: flex; gap: 0.25rem; }
+
+.nav-links a {
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.nav-links a:hover {
+  background: rgba(200,16,46,0.25); /* Red tint hover */
+  color: #fff;
+}
+
+
+
+.hero {
+  min-height: 100vh;
+  /*
+    GRADIENT HERO BACKGROUND
+    Multi-stop blue gradient: dark navy at top, shifts to a richer
+    royal blue at bottom, giving the hero a dramatic depth.
+    The radial glows (::before) layer on top of this gradient.
+  */
+  background: linear-gradient(160deg, #0a1128 0%, #1D2B5F 40%, #1e3a8a 75%, #162554 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle red glow + light shimmer layered over the gradient */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 120%, rgba(200,16,46,0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 35% at 85% 15%, rgba(59,130,246,0.15) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 10% 10%, rgba(255,255,255,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* School logo + name row at top of hero */
+.hero-school-id {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.5s ease both;
+}
+
+/*
+  HERO LOGO IMAGE — official Tesoro SVG (images/tesoro-logo.svg)
+  White rounded-square background so the SVG shows correctly on the
+  dark gradient hero. Drop shadow adds red glow for drama.
+*/
+.hero-logo-img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  background: transparent;
+  display: block;
+  filter: drop-shadow(0 4px 16px rgba(200,16,46,0.5));
+}
+
+.hero-school-name {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+/* "TESORO" large text */
+.hero-school-text-top {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  -webkit-text-stroke: 0.4px rgba(255,255,255,0.2);
+}
+
+/* "HIGH SCHOOL" red text */
+.hero-school-text-bottom {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 0.2rem;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+/* Motto under HIGH SCHOOL */
+.hero-school-motto {
+  font-size: 0.62rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 0.4rem;
+  display: block;
+}
+
+/* Pill badge */
+.hero-badge {
+  display: inline-block;
+  background: rgba(200,16,46,0.15);
+  color: var(--red);
+  border: 1px solid rgba(200,16,46,0.4);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 1rem;
+  margin-bottom: 1rem;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+/* Main title */
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(3rem, 9vw, 7rem);
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.75rem;
+  animation: fadeUp 0.7s 0.15s ease both;
+  /* Subtle black drop shadow + thin border via paint-order trick */
+  text-shadow: 0 2px 6px rgba(0,0,0,0.45);
+  -webkit-text-stroke: 0.5px rgba(255,255,255,0.15);
+}
+
+/* Period dots — Tesoro Red */
+.hero h1 span { color: var(--red); }
+
+
+/* Spelled-out acronym line beneath the B.R.I.D.G.E title.
+   Small, spaced out, faded — each initial letter is white/bright
+   to visually connect back to the big letters above. */
+.hero-bridge-spell {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+.hero-bridge-spell span {
+  color: var(--white);
+  font-weight: 700;
+}
+/* Subtitle */
+.hero-subtitle {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.6);
+  max-width: 520px;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+
+
+
+
+
+
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeUp 0.7s 0.35s ease both;
+}
+
+/* Solid red CTA */
+.btn-primary {
+  background: var(--red);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.85rem 2rem;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.2s;
+  letter-spacing: 0.04em;
+}
+.btn-primary:hover {
+  background: var(--red-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(200,16,46,0.35);
+}
+
+/* Outline CTA */
+.btn-secondary {
+  background: transparent;
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.85rem 2rem;
+  border-radius: 100px;
+  text-decoration: none;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  transition: all 0.2s;
+}
+.btn-secondary:hover { border-color: var(--red); color: #fff; }
+
+
+
+
+
+
+
+
+/* ============================================================
+   7. SHARED SECTION UTILITIES
+   ============================================================ */
+section { padding: 5rem 0; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+/* Alternating section backgrounds — light sections use a subtle blue tint gradient */
+#how-it-works     { background: var(--off-white); }
+#credits-gpa      { background: linear-gradient(135deg, #e8ecf7 0%, #dde5f5 100%); }
+#class-types      { background: var(--off-white); }
+#ap-courses       { background: linear-gradient(135deg, #e8ecf7 0%, #dde5f5 100%); }
+#extracurriculars { background: var(--off-white); }
+#resources        { background: linear-gradient(135deg, #e8ecf7 0%, #dde5f5 100%); }
+/* Timeline: rich multi-stop blue gradient — most dramatic section */
+#timeline {
+  background: linear-gradient(150deg, #0a1128 0%, #1D2B5F 35%, #1e3a8a 70%, #111c42 100%);
+  color: var(--white);
+}
+#checklist        { background: var(--off-white); }
+
+/* Small red all-caps label */
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.6rem;
+}
+
+/* Large serif heading */
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--navy);
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+/* Overrides for dark timeline section */
+#timeline .section-title { color: var(--white); }
+#timeline .section-label  { color: var(--red); }
+#timeline .section-desc   { color: rgba(255,255,255,0.55); }
+
+.section-desc {
+  color: var(--muted);
+  font-size: 1rem;
+  max-width: 580px;
+  margin-bottom: 2.5rem;
+}
+
+.col-heading {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem;
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+
+
+
+.motto-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  font-size: 0.92rem;
+  border-left: 4px solid;
+}
+
+/* Wisdom: pale navy bg */
+.motto-callout.wisdom {
+  background: var(--navy-light);
+  border-color: var(--navy);
+  color: var(--navy);
+}
+
+/* Strength: pale red bg */
+.motto-callout.strength {
+  background: var(--red-light);
+  border-color: var(--red);
+  color: var(--red-dark);
+}
+
+/* Honor: soft blue-white */
+.motto-callout.honor {
+  background: #eef0f9;
+  border-color: var(--navy-mid);
+  color: var(--navy);
+}
+
+.callout-icon { font-size: 1.3rem; min-width: 1.5rem; }
+
+
+/* ============================================================
+   9. SECTION: HOW HIGH SCHOOL WORKS — YEAR CARDS
+   ============================================================ */
+.years-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.year-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-top: 4px solid var(--red); /* Red accent top bar */
+}
+
+.year-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(29,43,95,0.12);
+}
+
+/* Faint watermark number from data-num attribute */
+.year-card::before {
+  content: attr(data-num);
+  position: absolute;
+  top: -10px; right: 16px;
+  font-family: 'DM Serif Display', serif;
+  font-size: 5rem;
+  color: var(--navy);
+  opacity: 0.05;
+  line-height: 1;
+}
+
+.year-card .grade-tag {
+  display: inline-block;
+  background: var(--red);
+  color: var(--white);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.65rem;
+  border-radius: 100px;
+  margin-bottom: 0.75rem;
+}
+
+.year-card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem;
+  color: var(--navy);
+  margin-bottom: 0.5rem;
+}
+
+.year-card p { font-size: 0.9rem; color: var(--muted); }
+
+
+/* ============================================================
+   10. SECTION: CREDITS & GPA
+   ============================================================ */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.req-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.req-table thead th {
+  /* Navy→royal-blue gradient header row */
+  background: linear-gradient(90deg, #1D2B5F 0%, #1e3a8a 100%);
+  color: rgba(255,255,255,0.9);
+  text-align: left;
+  padding: 0.85rem 1rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.req-table tbody tr { border-bottom: 1px solid var(--border); }
+.req-table tbody tr:last-child { border-bottom: none; }
+.req-table tbody tr:hover { background: var(--navy-light); }
+.req-table tbody td { padding: 0.85rem 1rem; color: var(--text); }
+.req-table tbody td:first-child { font-weight: 600; color: var(--navy); }
+.req-table tbody td:last-child { color: var(--muted); }
+
+.gpa-cards { display: flex; flex-direction: column; gap: 1rem; }
+
+.gpa-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+}
+
+.gpa-grade {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  color: var(--navy);
+  width: 32px;
+  text-align: center;
+}
+
+.gpa-bar-wrap {
+  flex: 1;
+  height: 8px;
+  background: var(--light-gray);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+/* Default bar color = Navy; overridden per-row in HTML */
+.gpa-bar {
+  height: 100%;
+  border-radius: 100px;
+  background: var(--navy);
+}
+
+.gpa-val { font-weight: 700; font-size: 0.9rem; color: var(--navy); min-width: 30px; text-align: right; }
+
+.gpa-note {
+  background: var(--red-light);
+  border-left: 3px solid var(--red);
+  border-radius: 0 12px 12px 0;
+  padding: 1rem 1.25rem;
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+  color: #8a0d20;
+}
+
+.gpa-footer-note { margin-top: 1rem; font-size: 0.85rem; color: var(--muted); }
+
+
+/* ============================================================
+   11. SECTION: CLASS TYPES
+   ============================================================ */
+.class-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1.25rem;
+}
+
+.class-card {
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  border: 1px solid transparent;
+  transition: transform 0.2s;
+}
+
+.class-card:hover { transform: translateY(-3px); }
+
+.class-card.regular { background: var(--white);       border-color: var(--border);           border-top: 4px solid var(--muted); }
+.class-card.cp      { background: var(--navy-light);  border-color: rgba(29,43,95,0.2);      border-top: 4px solid var(--navy-mid); }
+.class-card.honors  { background: #dde3f5;            border-color: rgba(29,43,95,0.25);     border-top: 4px solid var(--navy); }
+.class-card.ap      { background: linear-gradient(135deg, #1D2B5F 0%, #1e3a8a 60%, #162554 100%); color: var(--white); border-top: 4px solid var(--red); }
+
+.cc-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.6rem; }
+.class-card.regular .cc-label { color: var(--muted); }
+.class-card.cp      .cc-label { color: var(--navy-mid); }
+.class-card.honors  .cc-label { color: var(--navy); }
+.class-card.ap      .cc-label { color: var(--red); }
+
+.class-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.3rem; margin-bottom: 0.5rem; }
+.class-card.regular h3 { color: var(--navy); }
+.class-card.cp      h3 { color: var(--navy); }
+.class-card.honors  h3 { color: var(--navy); }
+.class-card.ap      h3 { color: var(--white); }
+
+.class-card p { font-size: 0.88rem; }
+.class-card.regular p { color: var(--muted); }
+.class-card.cp      p { color: var(--navy-mid); }
+.class-card.honors  p { color: var(--navy); }
+.class-card.ap      p { color: rgba(255,255,255,0.65); }
+
+.gpa-bump { display: inline-block; margin-top: 0.75rem; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.65rem; border-radius: 100px; }
+.class-card.regular .gpa-bump { background: var(--light-gray);       color: var(--muted); }
+.class-card.cp      .gpa-bump { background: rgba(29,43,95,0.12);     color: var(--navy); }
+.class-card.honors  .gpa-bump { background: rgba(29,43,95,0.18);     color: var(--navy); }
+.class-card.ap      .gpa-bump { background: rgba(200,16,46,0.2);     color: var(--red); }
+
+.class-tip { margin-top: 1.5rem; font-size: 0.88rem; color: var(--muted); }
+
+
+/* ============================================================
+   12. SECTION: AP COURSES
+   ============================================================ */
+.ap-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 0.65rem 1.25rem;
+  transition: border-color 0.2s;
+}
+.ap-search-wrap:focus-within { border-color: var(--red); }
+
+.search-icon { color: var(--red); font-size: 1rem; }
+
+.ap-search-wrap input {
+  border: none; outline: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem; flex: 1;
+  background: transparent; color: var(--text);
+}
+
+.ap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.ap-chip {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+/* Hover/active: navy fill */
+.ap-chip:hover, .ap-chip.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+
+/* Arrow turns red when active */
+.ap-chip:hover .ap-chip-arrow,
+.ap-chip.active .ap-chip-arrow { color: var(--red); }
+
+.ap-chip-name { font-size: 0.88rem; font-weight: 500; }
+.ap-chip-arrow { font-size: 0.75rem; color: var(--muted); }
+
+/* Detail panel */
+.ap-detail-panel {
+  display: none;
+  background: linear-gradient(135deg, #111c42 0%, #1D2B5F 50%, #1e3472 100%);
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-top: 1.5rem;
+  border-left: 5px solid var(--red); /* Red accent bar */
+  animation: fadeUp 0.3s ease;
+}
+
+.ap-detail-panel.open { display: block; }
+
+.ap-detail-panel h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.ap-detail-panel p { font-size: 0.92rem; color: rgba(255,255,255,0.75); max-width: 640px; }
+
+.ap-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+
+.ap-tag {
+  background: rgba(200,16,46,0.2);
+  border: 1px solid rgba(200,16,46,0.35);
+  color: #f5a5b3;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.7rem;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+}
+
+
+/* ============================================================
+   13. SECTION: EXTRACURRICULARS — TABS
+   ============================================================ */
+.extra-tabs { display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+
+.extra-tab {
+  padding: 0.5rem 1.2rem;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  color: var(--muted);
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* Active tab: Tesoro Red */
+.extra-tab.active { background: var(--red); color: var(--white); border-color: var(--red); }
+.extra-tab:hover:not(.active) { border-color: var(--red); color: var(--red); }
+
+.extra-content { display: none; }
+.extra-content.active { display: block; animation: fadeUp 0.3s ease; }
+
+.extra-note { font-size: 0.9rem; color: var(--muted); margin-bottom: 1.25rem; }
+
+.extra-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.extra-item {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  font-size: 0.88rem;
+  color: var(--text);
+  font-weight: 500;
+  transition: border-color 0.15s;
+}
+
+.extra-item:hover { border-color: var(--red); color: var(--red); }
+
+
+/* ============================================================
+   14. SECTION: RESOURCES
+   ============================================================ */
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.resource-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.resource-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(29,43,95,0.1);
+}
+
+.resource-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+/* Three icon color variants (Tesoro colors) */
+.ri-red   { background: var(--red-light); }
+.ri-navy  { background: var(--navy-light); }
+.ri-blue  { background: #dde8fa; }
+
+.resource-card h3 { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 0.4rem; }
+.resource-card p  { font-size: 0.85rem; color: var(--muted); }
+
+/* "Who to Ask" banner — gradient navy */
+.help-banner {
+  margin-top: 2rem;
+  background: linear-gradient(105deg, #111c42 0%, #1D2B5F 60%, #1e3472 100%);
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 1.75rem 2rem;
+  border-left: 5px solid var(--red);
+}
+
+.help-banner-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.help-banner-text { color: rgba(255,255,255,0.75); font-size: 0.9rem; }
+.help-banner-text strong { color: var(--white); }
+
+
+/* ============================================================
+   15. SECTION: TIMELINE
+   ============================================================ */
+.timeline-track {
+  position: relative;
+  padding-left: 2.5rem;
+  border-left: 2px solid rgba(255,255,255,0.2); /* The vertical line */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 620px;
+}
+
+.timeline-item { position: relative; }
+
+/* Red dot on the line */
+.timeline-dot {
+  position: absolute;
+  left: -2.65rem; top: 0.2rem;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 3px solid var(--navy);
+  box-shadow: 0 0 0 2px var(--red);
+}
+
+.timeline-year {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.4rem;
+}
+
+.timeline-item h3 { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--white); margin-bottom: 0.4rem; }
+.timeline-item ul  { padding-left: 1.25rem; }
+.timeline-item li  { font-size: 0.9rem; color: rgba(255,255,255,0.65); margin-bottom: 0.25rem; }
+
+
+/* ============================================================
+   16. SECTION: CHECKLIST
+   ============================================================ */
+.checklist-wrap {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  /* No max-width — fills the full .container width, consistent with all other sections */
+}
+
+/* Red→deeper-red gradient header bar */
+.checklist-header {
+  background: linear-gradient(90deg, var(--red) 0%, #a00d24 100%);
+  padding: 1.25rem 1.75rem;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem;
+  color: var(--white);
+}
+
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.1rem 1.75rem;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.checklist-item:last-child { border-bottom: none; }
+.checklist-item:hover { background: var(--navy-light); }
+
+.check-box {
+  width: 22px; height: 22px; min-width: 22px;
+  border-radius: 6px;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  margin-top: 0.1rem;
+}
+
+/* Checked = Navy fill */
+.checklist-item.done .check-box { background: var(--navy); border-color: var(--navy); }
+
+.check-tick { display: none; color: var(--white); font-size: 0.8rem; font-weight: 700; }
+.checklist-item.done .check-tick { display: block; }
+
+.checklist-item .text    { font-size: 0.95rem; color: var(--text); }
+.checklist-item .subtext { font-size: 0.82rem; color: var(--muted); margin-top: 0.15rem; }
+.checklist-item.done .text { color: var(--muted); text-decoration: line-through; }
+
+
+/* ============================================================
+   17. FOOTER
+   ============================================================ */
+footer {
+  /* Deep navy gradient — darkens at corners for a rich look */
+  background: linear-gradient(160deg, #0a1128 0%, #1D2B5F 50%, #111c42 100%);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 3rem 2rem 2.5rem;
+  font-size: 0.85rem;
+  border-top: 4px solid var(--red); /* Tesoro red stripe at top */
+}
+
+
+
+footer .footer-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  color: var(--white);
+  letter-spacing: 0.15em;
+  margin-bottom: 0.3rem;
+}
+
+
+.footer-motto {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+footer p { max-width: 480px; margin: 0 auto 1rem; line-height: 1.6; }
+
+.footer-school {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-top: 1.5rem;
+}
+
+
+/* ============================================================
+   18. ANIMATIONS
+   ============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
+
+/* ============================================================
+   19. RESPONSIVE / MOBILE
+   ============================================================ */
+@media (max-width: 768px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  section { padding: 3.5rem 0; }
+  .container { padding: 0 1.25rem; }
+  .hero { padding: 5rem 1.25rem 3rem; }  /* hero has its own padding */
+  .hero-school-id { flex-direction: column; gap: 0.75rem; }
+  .hero-school-name { text-align: center; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <div class="nav-school-logo">
+      <img src="data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%20standalone%3D%22no%22%3F%3E%0A%3Csvg%0A%09xmlns%3D%22http%3A//www.w3.org/2000/svg%22%0A%09version%3D%221.1%22%0A%09width%3D%22256%22%0A%09height%3D%22256%22%3E%0A%09%3Cg%3E%0A%09%09%3Cpath%0A%09%09%09d%3D%22m%208%2C16%200%2C96%2072%2C0%200%2C-16%208%2C0%200%2C64%20-8%2C0%200%2C80%2096%2C0%200%2C-80%20-8%2C0%200%2C-64%208%2C0%200%2C16%2072%2C0%200%2C-96%20z%22%0A%09%09%09style%3D%22fill%3A%23ffffff%3Bfill-opacity%3A1%3Bstroke%3Anone%22%20/%3E%0A%09%09%3Cpath%0A%09%09%09d%3D%22m%2016%2C24%200%2C80%2056%2C0%200%2C-16%2024%2C0%200%2C80%20-8%2C0%200%2C64%2080%2C0%200%2C-64%20-8%2C0%200%2C-80%2024%2C0%200%2C16%2056%2C0%200%2C-80%20z%22%0A%09%09%09style%3D%22fill%3A%23000080%3Bfill-opacity%3A1%3Bstroke%3Anone%22%20/%3E%0A%09%09%3Cpath%0A%09%09%09d%3D%22m%2032%2C40%200%2C48%2024%2C0%200%2C-16%2056%2C0%200%2C112%20-8%2C0%200%2C32%2048%2C0%200%2C-32%20-8%2C0%200%2C-112%2056%2C0%200%2C16%2024%2C0%200%2C-48%20z%22%0A%09%09%09style%3D%22fill%3A%23ffffff%3Bfill-opacity%3A1%3Bstroke%3Anone%22%20/%3E%0A%09%09%3Cpath%0A%09%09%09d%3D%22m%2040%2C48%200%2C32%208%2C0%20c%200%2C0%200%2C-16%208%2C-16%208%2C0%2064%2C0%2064%2C0%20l%200%2C128%20-8%2C0%200%2C16%2032%2C0%200%2C-16%20-8%2C0%200%2C-128%2064%2C0%20c%200%2C0%208%2C0%208%2C16%20l%208%2C0%200%2C-32%20z%22%0A%09%09%09style%3D%22fill%3A%23ff2400%3Bfill-opacity%3A1%3Bstroke%3Anone%22%20/%3E%0A%09%3C/g%3E%0A%3C/svg%3E%0A" alt="Tesoro High School T logo" class="nav-logo-img" />
+    </div>
+    <a class="nav-logo" href="#">B.R.I.D.G.E</a>
+  </div>
+  <div class="nav-links">
+    <a href="#how-it-works">System</a>
+    <a href="#credits-gpa">Credits &amp; GPA</a>
+    <a href="#class-types">Classes</a>
+    <a href="#ap-courses">AP Courses</a>
+    <a href="#extracurriculars">Activities</a>
+    <a href="#resources">Resources</a>
+    <a href="#checklist">Checklist</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-school-id">
+    <img src="data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%20standalone%3D%22no%22%3F%3E%0A%3Csvg%0A%09xmlns%3D%22http%3A//www.w3.org/2000/svg%22%0A%09version%3D%221.1%22%0A%09width%3D%22256%22%0A%09height%3D%22256%22%3E%0A%09%3Cg%3E%0A%09%09%3Cpath%0A%09%09%09d%3D%22m%208%2C16%200%2C96%2072%2C0%200%2C-16%208%2C0%200%2C64%20-8%2C0%200%2C80%2096%2C0%200%2C-80%20-8%2C0%200%2C-64%208%2C0%200%2C16%2072%2C0%200%2C-96%20z%22%0A%09%09%09style%3D%22fill%3A%23ffffff%3Bfill-opacity%3A1%3Bstroke%3Anone%22%20/%3E%0A%09%09%3Cpath%0A%09%09%09d%3D%22m%2016%2C24%200%2C80%2056%2C0%200%2C-16%2024%2C0%200%2C80%20-8%2C0%200%2C64%2080%2C0%200%2C-64%20-8%2C0%200%2C-80%2024%2C0%200%2C16%2056%2C0%200%2C-80%20z%22%0A%09%09%09style%3D%22fill%3A%23000080%3Bfill-opacity%3A1%3Bstroke%3Anone%22%20/%3E%0A%09%09%3Cpath%0A%09%09%09d%3D%22m%2032%2C40%200%2C48%2024%2C0%200%2C-16%2056%2C0%200%2C112%20-8%2C0%200%2C32%2048%2C0%200%2C-32%20-8%2C0%200%2C-112%2056%2C0%200%2C16%2024%2C0%200%2C-48%20z%22%0A%09%09%09style%3D%22fill%3A%23ffffff%3Bfill-opacity%3A1%3Bstroke%3Anone%22%20/%3E%0A%09%09%3Cpath%0A%09%09%09d%3D%22m%2040%2C48%200%2C32%208%2C0%20c%200%2C0%200%2C-16%208%2C-16%208%2C0%2064%2C0%2064%2C0%20l%200%2C128%20-8%2C0%200%2C16%2032%2C0%200%2C-16%20-8%2C0%200%2C-128%2064%2C0%20c%200%2C0%208%2C0%208%2C16%20l%208%2C0%200%2C-32%20z%22%0A%09%09%09style%3D%22fill%3A%23ff2400%3Bfill-opacity%3A1%3Bstroke%3Anone%22%20/%3E%0A%09%3C/g%3E%0A%3C/svg%3E%0A" alt="Tesoro High School T logo" class="hero-logo-img" />
+    <div class="hero-school-name">
+      <span class="hero-school-text-top">TESORO</span>
+      <span class="hero-school-text-bottom">HIGH SCHOOL</span>
+      <span class="hero-school-motto">Wisdom &nbsp;·&nbsp; Strength &nbsp;·&nbsp; Honor</span>
+    </div>
+  </div>
+  <div class="hero-badge">Student Navigation Guide</div>
+  <h1>B<span>.</span>R<span>.</span>I<span>.</span>D<span>.</span>G<span>.</span>E</h1>
+  <p class="hero-bridge-spell"><span>B</span>uilding <span>R</span>espect for <span>I</span>mmigrant <span>D</span>iversity and <span>G</span>lobal <span>E</span>ducation</p>
+  <p class="hero-subtitle">Building Respect for Immigrant Diversity and Global Education — a student-created guide to Tesoro High School and the U.S. education system.</p>
+  <div class="hero-cta">
+    <a class="btn-primary" href="#how-it-works">Start Learning</a>
+    <a class="btn-secondary" href="#checklist">New Student Checklist</a>
+  </div>
+</section>
+
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="section-label">Understanding the System</div>
+    <h2 class="section-title">The Four Years of High School</h2>
+    <p class="section-desc">Each year of high school serves a different purpose. Knowing what to expect helps you plan smarter and stay on track.</p>
+    <div class="years-grid">
+      <div class="year-card" data-num="9"><span class="grade-tag">9th Grade</span><h3>Freshman Year</h3><p>Your transition year. Adjust to the environment, learn how classes work, and begin building your academic record.</p></div>
+      <div class="year-card" data-num="10"><span class="grade-tag">10th Grade</span><h3>Sophomore Year</h3><p>Continue core classes and begin exploring interests through extracurricular activities and electives.</p></div>
+      <div class="year-card" data-num="11"><span class="grade-tag">11th Grade</span><h3>Junior Year</h3><p>The most academically important year. Take your most challenging classes, build strong grades, and begin college prep.</p></div>
+      <div class="year-card" data-num="12"><span class="grade-tag">12th Grade</span><h3>Senior Year</h3><p>Complete graduation requirements, apply to college, and prepare for life after high school.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDITS & GPA -->
+<section id="credits-gpa">
+  <div class="container">
+    <div class="section-label">How You Graduate &amp; Succeed</div>
+    <h2 class="section-title">Credits &amp; GPA Explained</h2>
+    <p class="section-desc">In the U.S., you graduate by earning credits — not just by completing four years. GPA measures your academic performance across all your classes.</p>
+    <div class="two-col">
+      <div>
+        <h3 class="col-heading">Graduation Requirements</h3>
+        <table class="req-table">
+          <thead><tr><th>Subject</th><th>Credits</th><th>Years</th></tr></thead>
+          <tbody>
+            <tr><td>English</td><td>40</td><td>4 years</td></tr>
+            <tr><td>Mathematics</td><td>30</td><td>3 years</td></tr>
+            <tr><td>Social Science</td><td>30</td><td>3 years</td></tr>
+            <tr><td>Science</td><td>20</td><td>2 years</td></tr>
+            <tr><td>Physical Education</td><td>20</td><td>2 years</td></tr>
+            <tr><td>Fine Arts / World Language</td><td>10</td><td>1 year</td></tr>
+            <tr><td>Health</td><td>5</td><td>1 semester</td></tr>
+            <tr><td>Electives</td><td>65</td><td>Varies</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3 class="col-heading">GPA Scale</h3>
+        <div class="gpa-cards">
+          <div class="gpa-row"><div class="gpa-grade">A</div><div class="gpa-bar-wrap"><div class="gpa-bar" style="width:100%;background:linear-gradient(90deg,#1D2B5F,#1e3a8a);"></div></div><div class="gpa-val">4.0</div></div>
+          <div class="gpa-row"><div class="gpa-grade">B</div><div class="gpa-bar-wrap"><div class="gpa-bar" style="width:75%;background:#3b6abf;"></div></div><div class="gpa-val" style="color:#3b6abf;">3.0</div></div>
+          <div class="gpa-row"><div class="gpa-grade">C</div><div class="gpa-bar-wrap"><div class="gpa-bar" style="width:50%;background:#7a91c4;"></div></div><div class="gpa-val" style="color:#7a91c4;">2.0</div></div>
+          <div class="gpa-row"><div class="gpa-grade">D</div><div class="gpa-bar-wrap"><div class="gpa-bar" style="width:25%;background:#C8102E;opacity:0.6;"></div></div><div class="gpa-val" style="color:#C8102E;">1.0</div></div>
+        </div>
+        <div class="gpa-note"><strong>Weighted GPA bonus:</strong> Honors classes add +0.5 &nbsp;·&nbsp; AP classes add +1.0 — so an A in an AP class = 5.0 GPA!</div>
+        <p class="gpa-footer-note">GPA reflects discipline and consistency — not just intelligence. Colleges look at your entire four-year trend.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLASS TYPES -->
+<section id="class-types">
+  <div class="container">
+    <div class="section-label">Choosing the Right Level</div>
+    <h2 class="section-title">Types of Classes</h2>
+    <p class="section-desc">Classes come in different difficulty levels. Choosing wisely balances challenge with wellbeing.</p>
+    <div class="class-grid">
+      <div class="class-card regular"><div class="cc-label">Standard</div><h3>Regular</h3><p>Standard level classes that meet all graduation requirements. A great foundation.</p><span class="gpa-bump">GPA: standard scale</span></div>
+      <div class="class-card cp"><div class="cc-label">College Prep</div><h3>CP</h3><p>Designed to prepare students for college-level work and expectations.</p><span class="gpa-bump">GPA: standard scale</span></div>
+      <div class="class-card honors"><div class="cc-label">Advanced</div><h3>Honors</h3><p>Faster-paced, more in-depth content. Requires strong study habits and commitment.</p><span class="gpa-bump">GPA: +0.5 boost</span></div>
+      <div class="class-card ap"><div class="cc-label">College-Level</div><h3>AP</h3><p>College-level courses with an end-of-year exam. Passing may earn real college credit.</p><span class="gpa-bump">GPA: +1.0 boost</span></div>
+    </div>
+    <p class="class-tip">💡 Taking challenging classes matters — but balance is key. Don't overload yourself.</p>
+  </div>
+</section>
+
+<!-- AP COURSES -->
+<section id="ap-courses">
+  <div class="container">
+    <div class="section-label">Advanced Placement at Tesoro</div>
+    <h2 class="section-title">AP Courses Offered</h2>
+    <p class="section-desc">Click any AP course below to learn more about what it covers, who it's for, and what to expect from the exam.</p>
+    <div class="ap-search-wrap"><span class="search-icon">🔍</span><input type="text" id="ap-search" placeholder="Search AP courses..." /></div>
+    <div class="ap-grid" id="ap-grid"></div>
+    <div class="ap-detail-panel" id="ap-detail">
+      <h3 id="ap-detail-name"></h3>
+      <p id="ap-detail-desc"></p>
+      <div class="ap-tags" id="ap-detail-tags"></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXTRACURRICULARS -->
+<section id="extracurriculars">
+  <div class="container">
+    <div class="section-label">Life Beyond the Classroom</div>
+    <h2 class="section-title">Extracurricular Activities</h2>
+    <p class="section-desc">Tesoro has 100+ clubs, 30+ sports teams, performing arts, and leadership programs. There's something for everyone — and you can create your own club.</p>
+    <div class="extra-tabs">
+      <button class="extra-tab active" data-tab="clubs">Clubs</button>
+      <button class="extra-tab" data-tab="arts">Performing Arts</button>
+      <button class="extra-tab" data-tab="sports">Athletics</button>
+      <button class="extra-tab" data-tab="leadership">Leadership</button>
+      <button class="extra-tab" data-tab="career">Career Programs</button>
+    </div>
+    <div class="extra-content active" id="tab-clubs">
+      <p class="extra-note">Clubs change every year — students can create new ones! Categories include:</p>
+      <div class="extra-items">
+        <div class="extra-item">National Honor Society</div><div class="extra-item">Math Club</div><div class="extra-item">Science Olympiad</div><div class="extra-item">Mock Trial</div><div class="extra-item">DECA / Business</div><div class="extra-item">Language Clubs</div><div class="extra-item">Cultural Heritage Clubs</div><div class="extra-item">Diversity / Multicultural</div><div class="extra-item">Key Club</div><div class="extra-item">Environmental Club</div><div class="extra-item">Charity &amp; Outreach</div><div class="extra-item">Art Club</div><div class="extra-item">Photography Club</div><div class="extra-item">Film &amp; Media</div><div class="extra-item">Creative Writing</div><div class="extra-item">Book Club</div><div class="extra-item">Gaming / eSports</div><div class="extra-item">Psychology Club</div><div class="extra-item">Fashion Club</div><div class="extra-item">+ Start Your Own!</div>
+      </div>
+    </div>
+    <div class="extra-content" id="tab-arts"><div class="extra-items"><div class="extra-item">Theater / Drama</div><div class="extra-item">ComedySportz (Improv)</div><div class="extra-item">Choir</div><div class="extra-item">Band</div></div></div>
+    <div class="extra-content" id="tab-sports">
+      <p class="extra-note">30+ teams across Varsity, JV, and Frosh levels:</p>
+      <div class="extra-items"><div class="extra-item">Football</div><div class="extra-item">Cheer / Song</div><div class="extra-item">Basketball</div><div class="extra-item">Soccer</div><div class="extra-item">Volleyball (Indoor)</div><div class="extra-item">Beach Volleyball</div><div class="extra-item">Tennis</div><div class="extra-item">Golf</div><div class="extra-item">Cross Country</div><div class="extra-item">Track &amp; Field</div><div class="extra-item">Baseball</div><div class="extra-item">Softball</div><div class="extra-item">Lacrosse</div><div class="extra-item">Swimming</div></div>
+    </div>
+    <div class="extra-content" id="tab-leadership"><div class="extra-items"><div class="extra-item">ASB (Student Body)</div><div class="extra-item">Class Officers</div><div class="extra-item">Homecoming Planning</div><div class="extra-item">Prom Committee</div><div class="extra-item">Rally Planning</div></div></div>
+    <div class="extra-content" id="tab-career"><div class="extra-items"><div class="extra-item">CTE Pathways</div><div class="extra-item">Internship Programs</div><div class="extra-item">Leadership Programs</div><div class="extra-item">Job Skills Training</div></div></div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section id="resources">
+  <div class="container">
+    <div class="section-label">Support at Tesoro</div>
+    <h2 class="section-title">Student Resources</h2>
+    <p class="section-desc">You don't have to figure everything out alone. These resources are here to help you every step of the way.</p>
+    <div class="resources-grid">
+      <div class="resource-card"><div class="resource-icon ri-blue">📚</div><h3>Canvas</h3><p>Track assignments, grades, and communicate with teachers — all in one place.</p></div>
+      <div class="resource-card"><div class="resource-icon ri-red">📋</div><h3>Aeries</h3><p>View your official schedule, attendance record, and final grades.</p></div>
+      <div class="resource-card"><div class="resource-icon ri-navy">🎓</div><h3>Counseling Office</h3><p>Get help with class planning, graduation requirements, and college applications.</p></div>
+      <div class="resource-card"><div class="resource-icon ri-blue">📖</div><h3>Library</h3><p>A quiet study space with academic resources, books, and research support.</p></div>
+      <div class="resource-card"><div class="resource-icon ri-red">💻</div><h3>Chromebooks</h3><p>Provided for schoolwork — keep yours charged and bring it to class daily.</p></div>
+      <div class="resource-card"><div class="resource-icon ri-navy">🍽️</div><h3>Free Lunch Program</h3><p>Available for eligible students. Ask your counselor about the application process.</p></div>
+    </div>
+    <div class="help-banner">
+      <div class="help-banner-label">Who to Ask for Help</div>
+      <p class="help-banner-text">Counselor → academics, college, schedule &nbsp;·&nbsp; Teachers → class help &nbsp;·&nbsp; Library → study support &nbsp;·&nbsp; Administration → general issues. <strong>Asking for help is normal and expected!</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="container">
+    <div class="section-label">Your Journey</div>
+    <h2 class="section-title">High School → College Timeline</h2>
+    <p class="section-desc">A roadmap of what to focus on each year so you're always moving forward.</p>
+    <div class="timeline-track">
+      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">Freshman Year · 9th Grade</div><h3>Settle In &amp; Explore</h3><ul><li>Adjust to high school life and expectations</li><li>Learn how GPA and credits work</li><li>Explore clubs and activities</li></ul></div>
+      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">Sophomore Year · 10th Grade</div><h3>Build Involvement</h3><ul><li>Commit to 1–2 extracurricular activities</li><li>Improve and maintain your GPA</li><li>Begin thinking about future goals</li></ul></div>
+      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">Junior Year · 11th Grade</div><h3>Academic Peak</h3><ul><li>Take your most challenging classes (AP/Honors)</li><li>Start researching colleges</li><li>Build relationships with teachers for recommendations</li></ul></div>
+      <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">Senior Year · 12th Grade</div><h3>Apply &amp; Launch</h3><ul><li>Complete all graduation requirements</li><li>Submit college applications (Common App, etc.)</li><li>Write personal essays and gather recommendations</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="checklist">
+  <div class="container">
+    <div class="section-label">Action Items</div>
+    <h2 class="section-title">New Student Checklist</h2>
+    <p class="section-desc">Click each item to check it off as you complete it. Start here if you're brand new to Tesoro.</p>
+    <div class="checklist-wrap">
+      <div class="checklist-header">Your First Steps at Tesoro</div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><div><div class="text">Meet your counselor</div><div class="subtext">Schedule a meeting to review your class schedule and goals</div></div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><div><div class="text">Learn how GPA works</div><div class="subtext">Understand the 4.0 scale and how weighted classes affect your GPA</div></div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><div><div class="text">Understand your class schedule</div><div class="subtext">Log into Aeries and Canvas to see your classes and assignments</div></div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><div><div class="text">Join at least one activity</div><div class="subtext">Explore clubs, sports, or performing arts that interest you</div></div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><div><div class="text">Ask questions early</div><div class="subtext">Talk to teachers, counselors, and other students — don't wait</div></div></div>
+      <div class="checklist-item" onclick="toggleCheck(this)"><div class="check-box"><span class="check-tick">✓</span></div><div><div class="text">Start thinking about future goals</div><div class="subtext">College? Career? Trade? Knowing your direction helps guide every decision</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-logo">B.R.I.D.G.E</div>
+  <div class="footer-motto">Wisdom &nbsp;·&nbsp; Strength &nbsp;·&nbsp; Honor</div>
+  <p>Building Respect for Immigrant Diversity and Global Education. A student-created guide to help immigrant and international students navigate Tesoro High School and the U.S. education system with confidence.</p>
+  <div class="footer-school">Tesoro High School &nbsp;·&nbsp; Titan Pride</div>
+</footer>
+
+<script>
+/*
+  ============================================================
+  B.R.I.D.G.E — Tesoro High School Student Guide
+  FILE: js/data.js
+  PURPOSE: Stores all the content/data for the AP Courses section.
+
+  WHY A SEPARATE FILE?
+    Keeping data separate from logic (main.js) is a best practice
+    called "separation of concerns." If you want to update a course
+    description or add a new AP class, you only edit THIS file —
+    you don't have to touch any code or behavior.
+
+  HOW IT'S USED:
+    This file is loaded BEFORE main.js in index.html.
+    The apCourses variable defined here is available as a global
+    variable that main.js can read and use to build the AP grid.
+
+  STRUCTURE OF EACH COURSE OBJECT:
+    {
+      name: "AP Course Name",   // Displayed as the chip label + detail title
+      desc: "...",              // Shown in the detail panel when clicked
+      tags: ["Tag1", "Tag2"]   // Category badges shown in the detail panel
+    }
+  ============================================================
+*/
+
+/*
+  apCourses — Array of AP Course Objects
+  -------------------------------------------------------
+  An array is a list of items in JavaScript.
+  Each item here is an "object" (curly braces {}) with three
+  properties: name, desc, and tags.
+
+  This list matches the official AP courses offered at Tesoro.
+  Add, remove, or edit entries here to update the site content.
+*/
+const apCourses = [
+
+  {
+    name: "AP Art History",
+    desc: "A survey of global art from prehistoric times to the present. Students explore visual arts movements, individual artists, and the cultural contexts that shaped them. The exam includes multiple choice and free-response essay questions requiring analysis of artworks.",
+    tags: ["Visual Arts", "History", "Essay-Heavy"]
+  },
+
+  {
+    name: "AP Biology",
+    desc: "A deep dive into the science of life — covering evolution, genetics, cellular biology, ecology, and biochemistry. The course is lab-based and concept-heavy. Ideal for students interested in medicine, research, or environmental science.",
+    tags: ["Science", "Lab Work", "Pre-Med Path"]
+  },
+
+  {
+    name: "AP Calculus AB",
+    desc: "Covers the foundations of calculus: limits, derivatives, and integrals. Equivalent to one semester of college calculus. Strong algebra and pre-calculus skills are essential before taking this course.",
+    tags: ["Math", "STEM", "College Credit"]
+  },
+
+  {
+    name: "AP Calculus BC",
+    desc: "Extends AP Calculus AB with additional topics including sequences, series, parametric equations, and advanced integration techniques. Equivalent to two semesters of college calculus. Best taken after or alongside Calculus AB.",
+    tags: ["Math", "STEM", "Advanced"]
+  },
+
+  {
+    name: "AP Chemistry",
+    desc: "Covers atomic structure, chemical bonding, reactions, thermodynamics, equilibrium, and kinetics. Requires strong math skills and includes extensive lab work. Great preparation for college-level science programs.",
+    tags: ["Science", "Lab Work", "Math-Intensive"]
+  },
+
+  {
+    name: "AP Computer Science A",
+    desc: "An introduction to computer science through Java programming. Focuses on object-oriented design, algorithms, data structures, and problem-solving. Great for students considering a career in software engineering or technology.",
+    tags: ["Coding", "Java", "STEM"]
+  },
+
+  {
+    name: "AP Computer Science Principles",
+    desc: "A broader introduction to computing that covers the internet, data, algorithms, and digital citizenship. No prior coding experience is required. Suitable for any student who wants to understand how technology works in the modern world.",
+    tags: ["Coding", "Introductory", "Digital Literacy"]
+  },
+
+  {
+    name: "AP English Language & Composition",
+    desc: "Focuses on rhetorical analysis, persuasive writing, and argumentation using nonfiction texts. Students analyze how authors construct arguments and practice building their own. This course builds essential writing skills for college.",
+    tags: ["Writing", "Rhetoric", "Nonfiction"]
+  },
+
+  {
+    name: "AP English Literature & Composition",
+    desc: "An in-depth analysis of fiction, poetry, and drama from various time periods. Emphasizes literary interpretation, close reading, and essay writing. Students develop skills to analyze complex texts and communicate ideas effectively.",
+    tags: ["Writing", "Literature", "Essay-Heavy"]
+  },
+
+  {
+    name: "AP Environmental Science",
+    desc: "Covers ecosystems, biodiversity, human impact on the environment, pollution, and sustainability. Combines concepts from biology, chemistry, and earth science. Excellent for students passionate about climate and environmental issues.",
+    tags: ["Science", "Environment", "Lab Work"]
+  },
+
+  {
+    name: "AP Human Geography",
+    desc: "Explores how humans shape and are shaped by their environment — studying populations, cultural patterns, political geography, land use, and globalization. Offers a global perspective on social and environmental challenges.",
+    tags: ["Social Science", "Geography", "Global Perspective"]
+  },
+
+  {
+    name: "AP Macroeconomics",
+    desc: "Covers national and global economy concepts including GDP, inflation, unemployment, monetary and fiscal policy, and international trade. A great introduction to economics for students interested in business, finance, or political science.",
+    tags: ["Economics", "Social Science", "Business Path"]
+  },
+
+  {
+    name: "AP Physics 1",
+    desc: "An algebra-based introduction to physics covering mechanics, waves, and basic electricity. A great starting point for students who haven't yet taken calculus. Lab experiments are a significant part of the course.",
+    tags: ["Science", "Math-Intensive", "Lab Work"]
+  },
+
+  {
+    name: "AP Physics C: Mechanics",
+    desc: "A calculus-based course covering kinematics, forces, energy, and rotation. This is a college-level course recommended for students who have already completed or are currently taking AP Calculus AB or BC.",
+    tags: ["Science", "Calculus Required", "Advanced"]
+  },
+
+  {
+    name: "AP Physics C: E&M",
+    desc: "Calculus-based electricity and magnetism — covering electric fields, circuits, magnetic forces, and electromagnetic induction. Requires a strong calculus and physics background. One of the most challenging AP courses.",
+    tags: ["Science", "Calculus Required", "Advanced"]
+  },
+
+  {
+    name: "AP Psychology",
+    desc: "An introduction to human behavior and mental processes. Topics include biological bases of behavior, perception, cognition, emotion, personality, psychological disorders, and social influence. Great for students interested in counseling, education, or research.",
+    tags: ["Social Science", "Behavioral", "Pre-Counseling Path"]
+  },
+
+  {
+    name: "AP Statistics",
+    desc: "Covers data collection, probability, distributions, and statistical inference. Statistics is useful in virtually every college major and career field — from medicine to business to social science. No calculus required.",
+    tags: ["Math", "Data", "STEM"]
+  },
+
+  {
+    name: "AP Studio Art (2D & Drawing)",
+    desc: "A portfolio-based course where students develop and refine their artistic skills over the school year. Instead of a traditional written exam, students submit a portfolio of original artwork to the College Board for evaluation.",
+    tags: ["Visual Arts", "Portfolio", "Creative"]
+  },
+
+  {
+    name: "AP U.S. Government & Politics",
+    desc: "Covers the structure and function of the U.S. government, constitutional principles, the role of political parties, elections, and civil liberties. Includes required reading of key political documents and involves essay writing.",
+    tags: ["Social Science", "Civics", "Essay-Heavy"]
+  },
+
+  {
+    name: "AP U.S. History",
+    desc: "A comprehensive study of American history from colonization through the present. Covers major events, movements, and turning points. Involves heavy reading, document analysis, and in-depth essay writing.",
+    tags: ["History", "Social Science", "Essay-Heavy"]
+  },
+
+  {
+    name: "AP World History",
+    desc: "Explores global history from approximately 1200 CE to the present — examining empires, trade networks, revolutions, and modern global systems. Requires strong reading and essay skills and a broad global perspective.",
+    tags: ["History", "Global", "Essay-Heavy"]
+  }
+
+]; // End of apCourses array
+
+
+/*
+  HOW TO ADD A NEW AP COURSE:
+  -------------------------------------------------------
+  Copy the template below and paste it before the closing ];
+  Then fill in the course name, description, and relevant tags.
+
+  Template:
+  {
+    name: "AP Course Name Here",
+    desc: "Write a 2-3 sentence description of the course here.",
+    tags: ["Category1", "Category2", "Category3"]
+  },
+
+  Common tag ideas:
+    - Subject areas: "Math", "Science", "History", "Writing", "Arts", "Coding"
+    - Skill type:    "Lab Work", "Essay-Heavy", "Portfolio", "Math-Intensive"
+    - Career paths:  "Pre-Med Path", "Business Path", "STEM", "Creative"
+    - Difficulty:    "Advanced", "Introductory", "Calculus Required"
+  -------------------------------------------------------
+*/
+
+</script>
+<script>
+/*
+  ============================================================
+  B.R.I.D.G.E — Tesoro High School Student Guide
+  FILE: js/main.js
+  PURPOSE: Controls all interactive behavior on the website.
+
+  DEPENDS ON:
+    - js/data.js must be loaded BEFORE this file.
+      (It provides the global `apCourses` array used by renderAP)
+    - index.html must be fully loaded before this script runs.
+      (Achieved by placing <script> tags at the bottom of <body>)
+
+  WHAT THIS FILE CONTROLS:
+    1. AP Course Grid  — renders course chips, handles search, shows detail panel
+    2. Extracurricular Tabs — switches between activity category panels
+    3. New Student Checklist — toggles items as done/not done
+
+  OVERVIEW OF HOW DOM MANIPULATION WORKS:
+    JavaScript can find HTML elements using document.getElementById('id')
+    or document.querySelectorAll('.class'). Once we have a reference
+    to an element, we can:
+      - Change its text content:    element.textContent = "new text"
+      - Change its HTML content:    element.innerHTML  = "<b>bold</b>"
+      - Add/remove CSS classes:     element.classList.add('open')
+                                    element.classList.remove('open')
+                                    element.classList.toggle('done')
+      - Listen for user actions:    element.addEventListener('click', fn)
+  ============================================================
+*/
+
+
+/* ============================================================
+   SECTION 1: AP COURSE GRID
+   ============================================================
+   This section builds the clickable grid of AP courses
+   from the apCourses data array (defined in data.js).
+
+   Flow:
+     1. renderAP() is called on page load → builds all chips
+     2. User types in search → renderAP(searchText) is called again
+        with only matching courses
+     3. User clicks a chip → showAPDetail(course) fills and shows
+        the detail panel below the grid
+   ============================================================ */
+
+/*
+  activeChip — Keeps track of which chip is currently selected.
+  Used to detect when the user clicks the same chip twice
+  (in that case, we close the detail panel instead of reopening it).
+  Starts as null meaning nothing is selected.
+*/
+let activeChip = null;
+
+
+/*
+  renderAP(filter)
+  -------------------------------------------------------
+  Builds the AP course chips inside the #ap-grid container.
+
+  PARAMETER:
+    filter (string) — optional search text to filter courses by name.
+    If empty string "" or not provided, ALL courses are shown.
+
+  HOW IT WORKS:
+    1. Clears the grid (so we start fresh each time)
+    2. Filters the apCourses array to only matching courses
+    3. For each matching course, creates a <div> chip element
+    4. Adds a click listener to each chip
+    5. Appends the chip to the grid
+    6. If nothing matches, shows an empty state message
+*/
+function renderAP(filter) {
+
+  // Default to empty string if no filter argument was passed
+  filter = filter || '';
+
+  // Get the grid container element from the HTML
+  const grid = document.getElementById('ap-grid');
+
+  // Clear any chips that were previously rendered
+  // (important for when the user types in the search box)
+  grid.innerHTML = '';
+
+  /*
+    Filter the apCourses array.
+    Array.filter() returns a new array with only items that pass the test.
+    The test: does the course name (lowercased) include the filter text (lowercased)?
+    Lowercasing both ensures the search is case-insensitive.
+  */
+  const filtered = apCourses.filter(function(course) {
+    return course.name.toLowerCase().includes(filter.toLowerCase());
+  });
+
+  /*
+    Loop through each filtered course and create a chip element.
+    forEach() calls the function once for each item in the array.
+  */
+  filtered.forEach(function(course) {
+
+    // Create a new <div> element (the chip)
+    const chip = document.createElement('div');
+
+    // Add the CSS class 'ap-chip' so styles.css applies to it
+    chip.className = 'ap-chip';
+
+    /*
+      Set the chip's inner HTML.
+      Template literal syntax (backtick `) lets us insert variables
+      directly into a string using ${variableName}.
+    */
+    chip.innerHTML =
+      '<span class="ap-chip-name">' + course.name + '</span>' +
+      '<span class="ap-chip-arrow">→</span>';
+
+    /*
+      Add a click event listener to this chip.
+      When the user clicks it, the function runs.
+    */
+    chip.addEventListener('click', function() {
+
+      // Get the detail panel element
+      const panel = document.getElementById('ap-detail');
+
+      /*
+        TOGGLE BEHAVIOR:
+        If the user clicks the SAME chip that's already active,
+        close the panel (deselect it).
+      */
+      if (activeChip === chip && panel.classList.contains('open')) {
+        panel.classList.remove('open');    // Hide the detail panel
+        chip.classList.remove('active');   // Deselect this chip visually
+        activeChip = null;                 // Clear the active chip tracker
+        return;                            // Stop here, don't re-open
+      }
+
+      /*
+        If a DIFFERENT chip is clicked:
+        1. Remove 'active' class from ALL chips (deselect them all)
+        2. Add 'active' to only this chip
+        3. Update the detail panel with this course's info
+        4. Show the detail panel
+      */
+
+      // Deselect all chips
+      document.querySelectorAll('.ap-chip').forEach(function(c) {
+        c.classList.remove('active');
+      });
+
+      // Select this chip
+      chip.classList.add('active');
+
+      // Remember this chip as the currently active one
+      activeChip = chip;
+
+      // Fill in the detail panel with this course's data
+      document.getElementById('ap-detail-name').textContent = course.name;
+      document.getElementById('ap-detail-desc').textContent = course.desc;
+
+      /*
+        Build the tags HTML.
+        Array.map() transforms each tag string into a <span> element string.
+        Array.join('') merges them all into one string with no separator.
+        Result: '<span class="ap-tag">Math</span><span class="ap-tag">STEM</span>'
+      */
+      const tagsHTML = course.tags.map(function(tag) {
+        return '<span class="ap-tag">' + tag + '</span>';
+      }).join('');
+
+      document.getElementById('ap-detail-tags').innerHTML = tagsHTML;
+
+      // Show the detail panel by adding the 'open' class
+      // CSS rule: .ap-detail-panel.open { display: block; }
+      panel.classList.add('open');
+
+      /*
+        Smoothly scroll the detail panel into view if it's below the fold.
+        'nearest' means: scroll the minimum amount needed to see the element.
+      */
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    }); // End click event listener
+
+    // Add the finished chip to the grid in the HTML
+    grid.appendChild(chip);
+
+  }); // End forEach loop
+
+  /*
+    EMPTY STATE:
+    If the search returned no results, show a friendly message.
+  */
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p style="color:var(--muted); font-size:0.9rem;">No courses match your search.</p>';
+  }
+
+} // End renderAP()
+
+
+/*
+  Initialize the AP grid on page load.
+  Calling renderAP() with no arguments shows ALL courses.
+*/
+renderAP();
+
+
+/*
+  SEARCH INPUT EVENT LISTENER
+  -------------------------------------------------------
+  Listens for any keystroke in the #ap-search input field.
+  Every time the user types or deletes a character, this fires.
+
+  'input' event fires immediately on every keystroke,
+  unlike 'change' which only fires when the input loses focus.
+*/
+document.getElementById('ap-search').addEventListener('input', function(event) {
+
+  /*
+    Close the detail panel whenever the user types a new search.
+    This prevents stale course details from showing while they search.
+  */
+  document.getElementById('ap-detail').classList.remove('open');
+  activeChip = null; // Reset active chip tracker
+
+  /*
+    Re-render the grid with the new search filter.
+    event.target is the input element.
+    event.target.value is the current text inside it.
+  */
+  renderAP(event.target.value);
+
+});
+
+
+/* ============================================================
+   SECTION 2: EXTRACURRICULAR TABS
+   ============================================================
+   Controls which tab is active and which content panel is visible.
+
+   HTML Structure:
+     <button class="extra-tab" data-tab="clubs">Clubs</button>
+     <div class="extra-content" id="tab-clubs">...</div>
+
+   When a tab is clicked:
+     1. Remove 'active' from ALL tabs and ALL content panels
+     2. Add 'active' to the clicked tab
+     3. Add 'active' to the content panel whose id matches data-tab
+
+   CSS rules:
+     .extra-tab           → default (not selected) style
+     .extra-tab.active    → selected/highlighted style
+     .extra-content       → display: none (hidden)
+     .extra-content.active → display: block (visible)
+   ============================================================ */
+
+/*
+  Select ALL elements with class 'extra-tab'.
+  querySelectorAll returns a NodeList (similar to an array).
+  We then add a click listener to each one.
+*/
+document.querySelectorAll('.extra-tab').forEach(function(tab) {
+
+  tab.addEventListener('click', function() {
+
+    /*
+      Step 1: Deactivate ALL tabs and ALL content panels.
+      This resets everything before we activate the correct ones.
+    */
+    document.querySelectorAll('.extra-tab').forEach(function(t) {
+      t.classList.remove('active');
+    });
+
+    document.querySelectorAll('.extra-content').forEach(function(content) {
+      content.classList.remove('active');
+    });
+
+    /*
+      Step 2: Activate the clicked tab.
+      'this' inside an event listener refers to the element that was clicked.
+    */
+    tab.classList.add('active');
+
+    /*
+      Step 3: Activate the matching content panel.
+
+      tab.dataset.tab reads the data-tab="clubs" attribute from the HTML.
+      So if data-tab="clubs", we look for an element with id="tab-clubs".
+
+      'tab-' + tab.dataset.tab builds the id string: "tab-clubs", "tab-arts", etc.
+    */
+    const targetPanel = document.getElementById('tab-' + tab.dataset.tab);
+    if (targetPanel) {
+      targetPanel.classList.add('active');
+    }
+
+  }); // End click listener
+
+}); // End forEach on tabs
+
+
+/* ============================================================
+   SECTION 3: NEW STUDENT CHECKLIST
+   ============================================================
+   Handles the interactive checklist in the #checklist section.
+
+   HOW IT WORKS:
+     Each checklist item has onclick="toggleCheck(this)" in the HTML.
+     When clicked, the browser calls toggleCheck() and passes
+     the clicked element as the argument (via 'this').
+
+     toggleCheck() simply adds or removes the CSS class 'done'.
+
+   CSS rules that respond to the 'done' class:
+     .checklist-item.done .check-box   → turns teal (checked color)
+     .checklist-item.done .check-tick  → becomes visible (✓ symbol)
+     .checklist-item.done .text        → gets line-through strikethrough
+   ============================================================ */
+
+/*
+  toggleCheck(item)
+  -------------------------------------------------------
+  Toggles the completion state of a checklist item.
+
+  PARAMETER:
+    item (HTMLElement) — the .checklist-item div that was clicked.
+    Passed automatically by the onclick="toggleCheck(this)" in HTML.
+
+  classList.toggle('done'):
+    - If 'done' is NOT on the element → ADDS it (marks as complete)
+    - If 'done' IS on the element    → REMOVES it (marks as incomplete)
+    This lets users un-check items if they clicked by mistake.
+*/
+function toggleCheck(item) {
+  item.classList.toggle('done');
+}
+
+
+/*
+  ============================================================
+  NOTES FOR FUTURE DEVELOPERS
+  ============================================================
+
+  HOW TO ADD A NEW TAB TO EXTRACURRICULARS:
+  ------------------------------------------
+  1. In index.html, add a button inside .extra-tabs:
+       <button class="extra-tab" data-tab="mynewtab">My New Tab</button>
+
+  2. In index.html, add a content panel inside the section:
+       <div class="extra-content" id="tab-mynewtab">
+         <div class="extra-items">
+           <div class="extra-item">Activity One</div>
+           <div class="extra-item">Activity Two</div>
+         </div>
+       </div>
+
+  The JavaScript will handle it automatically — no JS changes needed!
+
+
+  HOW TO ADD A NEW AP COURSE:
+  ------------------------------------------
+  Open js/data.js and add a new object to the apCourses array.
+  See the template at the bottom of that file.
+  No changes to main.js or index.html are needed.
+
+
+  HOW TO ADD A NEW CHECKLIST ITEM:
+  ------------------------------------------
+  In index.html, inside .checklist-wrap, copy and paste any
+  existing .checklist-item div and update the text and subtext.
+  The onclick="toggleCheck(this)" handles everything automatically.
+  ============================================================
+*/
+
+</script>
+</body>
+</html>
